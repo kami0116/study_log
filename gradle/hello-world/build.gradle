@@ -1,0 +1,11 @@
+def hello(){
+	println 'hello from function'
+}
+
+task helloWorld  {
+	println 'config helloworld task'
+	doLast{
+		println 'hello world!'
+		hello()
+	}
+}
