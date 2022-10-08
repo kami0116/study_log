@@ -1,0 +1,34 @@
+
+> Configure project :
+config helloworld task
+
+> Task :tasks
+
+------------------------------------------------------------
+Tasks runnable from root project 'hello-world'
+------------------------------------------------------------
+
+Build Setup tasks
+-----------------
+init - Initializes a new Gradle build.
+wrapper - Generates Gradle wrapper files.
+
+Help tasks
+----------
+buildEnvironment - Displays all buildscript dependencies declared in root project 'hello-world'.
+dependencies - Displays all dependencies declared in root project 'hello-world'.
+dependencyInsight - Displays the insight into a specific dependency in root project 'hello-world'.
+help - Displays a help message.
+javaToolchains - Displays the detected java toolchains.
+outgoingVariants - Displays the outgoing variants of root project 'hello-world'.
+projects - Displays the sub-projects of root project 'hello-world'.
+properties - Displays the properties of root project 'hello-world'.
+resolvableConfigurations - Displays the configurations that can be resolved in root project 'hello-world'.
+tasks - Displays the tasks runnable from root project 'hello-world'.
+
+To see all tasks and more detail, run gradle tasks --all
+
+To see more detail about a task, run gradle help --task <task>
+
+BUILD SUCCESSFUL in 520ms
+1 actionable task: 1 executed
