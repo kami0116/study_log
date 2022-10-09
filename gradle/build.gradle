@@ -1,0 +1,74 @@
+project.ext.hasTests=false
+
+allprojects {
+    afterEvaluate { project ->
+        if (project.hasTests) {
+            println "Adding test task to $project"
+            project.task('test') {
+                doLast {
+                    println "Running tests for $project"
+                }
+            }
+        }
+    }
+}
+
+gradle.afterProject { project ->
+    if (project.state.failure) {
+        println "Evaluation of $project FAILED"
+    } else {
+        println "Evaluation of $project succeeded"
+    }
+}
+
+println 'This is executed during the configuration phase.'
+
+tasks.register('configured') {
+    println 'This is also executed during the configuration phase, because :configured is used in the build.'
+}
+
+tasks.register('test') {
+    doLast {
+        println 'This is executed during the execution phase.'
+    }
+}
+
+tasks.register('testBoth') {
+	doFirst {
+	  println 'This is executed first during the execution phase.'
+	}
+	doLast {
+	  println 'This is executed last during the execution phase.'
+	}
+	println 'This is executed during the configuration phase as well, because :testBoth is used in the build.'
+}
+
+tasks.whenTaskAdded { task ->
+    task.ext.srcDir = 'src/main/java'
+}
+
+tasks.register('a')
+
+println "source dir is $a.srcDir"
+
+tasks.register('ok')
+
+tasks.register('broken') {
+    dependsOn ok
+    doLast {
+        throw new RuntimeException('broken')
+    }
+}
+
+gradle.taskGraph.beforeTask { Task task ->
+    println "executing $task ..."
+}
+
+gradle.taskGraph.afterTask { Task task, TaskState state ->
+    if (state.failure) {
+        println "FAILED"
+    }
+    else {
+        println "done"
+    }
+}
